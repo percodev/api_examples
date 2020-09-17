@@ -6,7 +6,7 @@
   "scripts": {
     "compile-browser": "tsc -p tsconfig.browser.json",
     "compile-node": "tsc -p tsconfig.node.json",
-    "compile": "tsc -p .",
+    "compile": "npm run compile-browser && npm run compile-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,5 +1,5 @@
 export {};
-//Метод установки логина, пароля администратора и региона при первом входе в систему
+//Метод удаления сессии оператора
 //Реализация на стороне браузера
 
 //Структура получаемых данных
@@ -10,14 +10,12 @@ interface ResponseData {
 //Здесь следует использовать адрес хоста percoweb
 let percoServerHost = "localhost";
 
-//Данные с логином, паролем и регионом для отправки запроса
+//Данные с авторизационным токеном
 let bodyParams = {
-    login: "admin",
-    password: "admin1",
-    region_id: 0
+    token: 'Kf7HNHuUgKnIZEnGC2CrlEwoUQqzRR5r' //Необходимо подставить действующий токен
 };
 fetch(`http://${percoServerHost}/api/system/auth`,{
-    method: 'put',
+    method: 'delete',
     headers: {
         'Content-Type': 'application/json'
       },
@@ -28,7 +26,7 @@ fetch(`http://${percoServerHost}/api/system/auth`,{
     let data = await response.json() as ResponseData ;
     //если сервер вернул код ответа 200, то обрабатываем данные
     if(response.ok) {
-        console.log("Логин и пароль установлены успешно")
+        console.log("Сессия оператора успешно сброшена")
     }
     //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
     else {
