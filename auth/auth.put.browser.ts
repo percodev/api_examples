@@ -1,23 +1,23 @@
 export {};
-//Метод авторизации по логину и паролю
+//Метод установки логина, пароля администратора и региона при первом входе в систему
 //Реализация на стороне браузера
 
 //Структура получаемых данных
 interface ResponseData {
-    token?: string; //возвращается в случае успеха
     error?: string; //возвращается в случае ошибки
 }
 
 //Здесь следует использовать адрес хоста percoweb
 let percoServerHost = "localhost";
 
-//Данные с логином и паролем для отправки запроса
+//Данные с логином, паролем и регионом для отправки запроса
 let bodyParams = {
     login: "admin",
     password: "admin1",
+    region_id: 0
 };
 fetch(`http://${percoServerHost}/api/system/auth`,{
-    method: 'post',
+    method: 'put',
     headers: {
         'Content-Type': 'application/json'
       },
@@ -37,8 +37,8 @@ fetch(`http://${percoServerHost}/api/system/auth`,{
     }
 })
 //обрабатываем полученные данные в случае успешного ответа сервера
-.then(data=>{
-    console.log("Авторизационный токен: ",data.token)
+.then(()=>{
+    console.log("Логин и пароль установлены успешно")
 })
 //обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 .catch(error=>{

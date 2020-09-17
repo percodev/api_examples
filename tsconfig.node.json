@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "es6",
+        "module": "commonjs",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "target": "es6",
@@ -8,5 +8,9 @@
         "noImplicitAny": false,
         "moduleResolution": "node",
         "sourceMap": true,
-    }
+        "outDir": "dist/node/"
+    },
+    "include": [
+        "*/**/*.node.ts"
+    ]
 }
