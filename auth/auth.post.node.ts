@@ -23,7 +23,7 @@ const options = {
 	method: 'POST',
 	headers: {
 		'Content-Type': 'application/json',
-		'Content-Length': bodyParams.length,
+		'Content-Length': Buffer.byteLength(bodyParams),
 	},
 };
 

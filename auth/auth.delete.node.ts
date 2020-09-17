@@ -9,20 +9,13 @@ interface ResponseData {
 }
 
 //Данные с авторизационным токеном
-let bodyParams = JSON.stringify({
-	token: 'Kf7HNHuUgKnIZEnGC2CrlEwoUQqzRR5r' //Необходимо подставить действующий токен
-});
-
+let token = 'CQNbhVm6vlZsviPTJFTv88T9Kk88u1aP'; //Необходимо подставить действующий токен
 //параметры http(s) запроса
 const options = {
 	hostname: 'localhost', //здесь неоходимо подставить адрес хоста percoweb
 	port: 80, //в случае https запроса следует указывать 443
-	path: '/api/system/auth',
+	path: `/api/system/auth?token=${token}`,
 	method: 'DELETE',
-	headers: {
-		'Content-Type': 'application/json',
-		'Content-Length': bodyParams.length,
-	},
 };
 
 const req = http.request(options, (response) => {
@@ -45,9 +38,6 @@ const req = http.request(options, (response) => {
         }
     })
 });
-
-//отправляем тело запроса
-req.write(bodyParams);
 
 //обработка ошибок, возникших при выполнении запроса
 req.on('error', (error) => {
