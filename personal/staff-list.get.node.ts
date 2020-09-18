@@ -2,6 +2,7 @@
 //Реализация на стороне сервера nodejs
 import http from 'http'; //в случае https запроса следует импортировать https модуль
 import { Staff } from "../models/staff.model";
+import querystring from "querystring";
 
 //Структура получаемых данных
 interface ErrorData {
@@ -9,20 +10,28 @@ interface ErrorData {
 }
 type ResponseData = ErrorData & Staff;
 
-//авторизационный токен
-const token = 'HWicBUrz3ms0TzOEg8IAn0gntGW1RKux'; 
 
-//id сотрудника, данные которого получаем
-const userId = 140;
+//Подразделение(я)
+let division = '3,4,5'
+
+//Строка поиска
+let searchString = 'Семен'
+
+// Формируем строку параметров
+let queryString = querystring.stringify({
+	token: '5AmYlxheHEl6HrLUDiCfoh0ZJxzqMljR',
+	division: ['3','4','5'],
+	searchString: 'Семен'
+})
 
 //параметры http(s) запроса
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/users/staff/${userId}?token=${token}`,
+    path: `/api/users/staff/list?${queryString}`,
     method: 'GET'
 };
-
+console.log(options)
 //запрос к серверу
 const req = http.request(options, (response) => {
 	let data = '';
@@ -36,7 +45,7 @@ const req = http.request(options, (response) => {
 		let responseData = JSON.parse(data) as ResponseData;
 		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
 		if (response.statusCode === 200) {
-			console.log(`Данные сотрудника с id=${userId}: `, responseData);
+			console.log(`Список сотрудников: `, responseData);
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {

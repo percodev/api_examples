@@ -39,7 +39,7 @@ fetch(`http://${percoServerHost}/api/users/staff/${userId}?token=${token}`,{
 })
 //обрабатываем полученные данные в случае успешного ответа сервера
 .then(data=>{
-    console.log(`Данные пользователя с id=${userId}: `,data)
+    console.log(`Данные сотрудника с id=${userId}: `,data)
 })
 //обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 .catch(error=>{
