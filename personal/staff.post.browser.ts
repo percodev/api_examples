@@ -1,10 +1,10 @@
 export {};
-//Метод добавления нового сотрудника
+//Метод редактирования сотрудника
 //Реализация на стороне браузера
 
 //Структура получаемых данных
 interface ResponseData {
-    id?: number; //id сотрудника (возвращается в случае успеха)
+    result?: string; //возвращается в случае успеха
     error?: string; //возвращается в случае ошибки
 }
 
@@ -15,10 +15,10 @@ let percoServerHost = "localhost";
 let bodyParams = {
 	last_name: 'Семенов',
 	first_name: 'Семен',
-	middle_name: 'Семенович',
+	middle_name: 'Олегович',
 	tabel_number: '12345678',
-	division: 5,
-	position: 5,
+	division: 4,
+	position: 4,
 	work_schedule: 5,
 	access_template: 3,
 	additional_fields: {
@@ -33,10 +33,13 @@ let bodyParams = {
 };
 
 //авторизационный токен
-let token = 'zQkj92MloJ1PrZ45hYx0YsppzC77STto'; 
+const token = 'bUDkzABNuYI1QN94Z3FZQqhvK54osBk9';
 
-fetch(`http://${percoServerHost}/api/users/staff?token=${token}`,{
-    method: 'put',
+//id сотрудника, данные которого редактируем
+const userId = 140;
+
+fetch(`http://${percoServerHost}/api/users/staff/${userId}?token=${token}`,{
+    method: 'post',
     headers: {
         'Content-Type': 'application/json'
       },
@@ -57,7 +60,7 @@ fetch(`http://${percoServerHost}/api/users/staff?token=${token}`,{
 })
 //обрабатываем полученные данные в случае успешного ответа сервера
 .then(data=>{
-    console.log("ID сотрудника: ",data.id)
+    console.log("Результат операции: ",data.result)
 })
 //обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 .catch(error=>{

@@ -37,5 +37,5 @@ fetch(`http://${percoServerHost}/api/system/auth`,{
 })
 //обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 .catch(error=>{
-    console.log(error)
+    console.log(error.message)
 })
