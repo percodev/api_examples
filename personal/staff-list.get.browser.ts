@@ -1,41 +1,51 @@
-export {};
-//Метод установки логина, пароля администратора и региона при первом входе в систему
+import { Staff } from "../models/staff.model";
+//Метод получения списка сотрудников
 //Реализация на стороне браузера
 
 //Структура получаемых данных
-interface ResponseData {
+
+interface ErrorData {
     error?: string; //возвращается в случае ошибки
 }
+
+
+type ResponseData = ErrorData & Staff[];
 
 //Здесь следует использовать адрес хоста percoweb
 let percoServerHost = "localhost";
 
-//Данные с логином, паролем и регионом для отправки запроса
-let bodyParams = {
-    login: "admin",
-    password: "admin1",
-    region_id: 0
-};
+//авторизационный токен
+const token = 'lTIsRDnrbJH4wW1fNGy45WLUF6gwqyl4';
+
+//Подразделение(я)
+let division = '3,4,5'
+
+//Строка поиска
+let searchString = 'Семен'
+
+// Формируем строку параметров
+let queryString = `token=${token}&searchString=${searchString}&division=${division}`;
 
 //запрос к серверу
-fetch(`http://${percoServerHost}/api/system/auth`,{
-    method: 'put',
-    headers: {
-        'Content-Type': 'application/json'
-      },
-    body: JSON.stringify(bodyParams)
+fetch(`http://${percoServerHost}/api/users/staff/list?${queryString}`,{
+    method: 'get'
 })
 .then(async response=>{
     //декодируем ответ в формате json
     let data = await response.json() as ResponseData ;
-    //если сервер вернул код ответа 200, то обрабатываем данные
+    //если сервер вернул код ответа 200, то передаем декодированные данные
+    //в следующий обработчик then
     if(response.ok) {
-        console.log("Логин и пароль установлены успешно")
+        return data;
     }
     //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
     else {
         throw new Error(data.error)
     }
+})
+//обрабатываем полученные данные в случае успешного ответа сервера
+.then(data=>{
+    console.log(`Список сортудников: `,data)
 })
 //обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 .catch(error=>{

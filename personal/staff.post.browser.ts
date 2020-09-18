@@ -38,6 +38,7 @@ const token = 'bUDkzABNuYI1QN94Z3FZQqhvK54osBk9';
 //id сотрудника, данные которого редактируем
 const userId = 140;
 
+//запрос к серверу
 fetch(`http://${percoServerHost}/api/users/staff/${userId}?token=${token}`,{
     method: 'post',
     headers: {

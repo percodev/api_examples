@@ -16,6 +16,8 @@ let bodyParams = {
     login: "admin",
     password: "admin1",
 };
+
+//запрос к серверу
 fetch(`http://${percoServerHost}/api/system/auth`,{
     method: 'post',
     headers: {

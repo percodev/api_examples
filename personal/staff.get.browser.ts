@@ -20,6 +20,7 @@ const token = 'kutD17JEO48viQCbdXOGh9EUhsR6LaXO';
 //id сотрудника, данные которого получаем
 const userId = 140;
 
+//запрос к серверу
 fetch(`http://${percoServerHost}/api/users/staff/${userId}?token=${token}`,{
     method: 'get'
 })

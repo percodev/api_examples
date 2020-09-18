@@ -18,6 +18,7 @@ const options = {
 	method: 'DELETE',
 };
 
+//запрос к серверу
 const req = http.request(options, (response) => {
     let data = ''
     //получаем данные от сервера

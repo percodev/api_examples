@@ -35,6 +35,7 @@ let bodyParams = {
 //авторизационный токен
 let token = 'zQkj92MloJ1PrZ45hYx0YsppzC77STto'; 
 
+//запрос к серверу
 fetch(`http://${percoServerHost}/api/users/staff?token=${token}`,{
     method: 'put',
     headers: {

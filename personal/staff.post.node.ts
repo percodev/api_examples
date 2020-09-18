@@ -48,6 +48,7 @@ const options = {
     
 };
 
+//запрос к серверу
 const req = http.request(options, (response) => {
 	let data = '';
 	//получаем данные от сервера
