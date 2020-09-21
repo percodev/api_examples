@@ -11,17 +11,11 @@ interface ErrorData {
 type ResponseData = ErrorData & Staff;
 
 
-//Подразделение(я)
-let division = '3,4,5'
-
-//Строка поиска
-let searchString = 'Семен'
-
 // Формируем строку параметров
 let queryString = querystring.stringify({
-	token: '5AmYlxheHEl6HrLUDiCfoh0ZJxzqMljR',
-	division: ['3','4','5'],
-	searchString: 'Семен'
+	token: '5AmYlxheHEl6HrLUDiCfoh0ZJxzqMljR', //авторизационный токен
+	division: ['3','4','5'], //подразделение(я)
+	searchString: 'Семен' //строка происка
 })
 
 //параметры http(s) запроса
