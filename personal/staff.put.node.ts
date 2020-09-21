@@ -31,7 +31,7 @@ let bodyParams = JSON.stringify({
 });
 
 //авторизационный токен
-let token = 'zQkj92MloJ1PrZ45hYx0YsppzC77STto'; 
+let token = 'master'; 
 //параметры http(s) запроса
 const options = {
     hostname: 'localhost',

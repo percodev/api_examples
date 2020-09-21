@@ -33,7 +33,7 @@ let bodyParams = {
 };
 
 //авторизационный токен
-let token = 'zQkj92MloJ1PrZ45hYx0YsppzC77STto'; 
+let token = 'master'; 
 
 //запрос к серверу
 fetch(`http://${percoServerHost}/api/users/staff?token=${token}`,{

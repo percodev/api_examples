@@ -15,7 +15,7 @@ type ResponseData = ErrorData & Staff;
 let percoServerHost = "localhost";
 
 //авторизационный токен
-const token = 'kutD17JEO48viQCbdXOGh9EUhsR6LaXO';
+const token = 'master';
 
 //id сотрудника, данные которого получаем
 const userId = 140;

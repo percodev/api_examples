@@ -31,7 +31,7 @@ let bodyParams = JSON.stringify({
 });
 
 //авторизационный токен
-const token = 'bUDkzABNuYI1QN94Z3FZQqhvK54osBk9'; 
+const token = 'master'; 
 
 //id сотрудника, данные которого редактируем
 const userId = 140;

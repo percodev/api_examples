@@ -9,7 +9,7 @@ interface ResponseData {
 }
 
 //Данные с авторизационным токеном
-let token = 'CQNbhVm6vlZsviPTJFTv88T9Kk88u1aP'; //Необходимо подставить действующий токен
+let token = 'master'; //Необходимо подставить действующий токен
 //параметры http(s) запроса
 const options = {
 	hostname: 'localhost', //здесь неоходимо подставить адрес хоста percoweb

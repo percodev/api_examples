@@ -11,7 +11,7 @@ interface ResponseData {
 let percoServerHost = 'localhost';
 
 //Данные с авторизационным токеном
-let token = '5Dth6VMgWWUzqDAkXfhXKkjqwAqTteCW'; //Необходимо подставить действующий токен
+let token = 'master'; //Необходимо подставить действующий токен
 
 //запрос к серверу
 fetch(`http://${percoServerHost}/api/system/auth?token=${token}`, {

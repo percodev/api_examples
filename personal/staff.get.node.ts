@@ -10,7 +10,7 @@ interface ErrorData {
 type ResponseData = ErrorData & Staff;
 
 //авторизационный токен
-const token = 'HWicBUrz3ms0TzOEg8IAn0gntGW1RKux'; 
+const token = 'master'; 
 
 //id сотрудника, данные которого получаем
 const userId = 140;

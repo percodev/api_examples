@@ -1,31 +1,43 @@
+export {};
 //Метод добавления нового сотрудника
 //Реализация на стороне сервера nodejs
 import http from 'http'; //в случае https запроса следует импортировать https модуль
-import { Staff } from "../models/staff.model";
 import querystring from "querystring";
 
 //Структура получаемых данных
-interface ErrorData {
+interface ResponseData {
+	result?: number; //id сотрудника (возвращается в случае успеха)
 	error?: string; //возвращается в случае ошибки
 }
-type ResponseData = ErrorData & Staff;
 
+//Данные body для отправки запроса
+let bodyParams = JSON.stringify({
+	is_active: false,
+    dismissed_date: "2020-09-21" //дата увольнения
+});
+
+//id сотрудника(ов), которого(ых) увольняем
+let ids = ['140','139'];
 
 // Формируем строку параметров
 let queryString = querystring.stringify({
 	token: 'master', //авторизационный токен
-	division: ['3','4','5'], //подразделение(я)
-	searchString: 'Семен' //строка происка
+	ids
 })
 
 //параметры http(s) запроса
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/users/staff/list?${queryString}`,
-    method: 'GET'
+    path: `/api/users/staff?${queryString}`,
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(bodyParams),
+    },
+    
 };
-console.log(options)
+
 //запрос к серверу
 const req = http.request(options, (response) => {
 	let data = '';
@@ -39,7 +51,7 @@ const req = http.request(options, (response) => {
 		let responseData = JSON.parse(data) as ResponseData;
 		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
 		if (response.statusCode === 200) {
-			console.log(`Список сотрудников: `, responseData);
+			console.log(`Сотрудник(и) с id=${ids} успешно уволен(ы):`)
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {
@@ -47,6 +59,9 @@ const req = http.request(options, (response) => {
 		}
 	});
 });
+
+//отправляем тело запроса
+req.write(bodyParams);
 
 //обработка ошибок, возникших при выполнении запроса
 req.on('error', (error) => {

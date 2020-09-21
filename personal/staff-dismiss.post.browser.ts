@@ -18,7 +18,7 @@ let bodyParams = {
 };
 
 //авторизационный токен
-const token = 'UvK40Imx4a4ebitzadmhNX5DfqbTpi7l';
+const token = 'master';
 
 //id сотрудника(ов), которого(ых) увольняем
 const ids = '140,139';

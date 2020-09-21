@@ -15,7 +15,7 @@ type ResponseData = ErrorData & Staff[];
 let percoServerHost = "localhost";
 
 //авторизационный токен
-const token = 'lTIsRDnrbJH4wW1fNGy45WLUF6gwqyl4';
+const token = 'master';
 
 //Подразделение(я)
 let division = '3,4,5'
