@@ -1,10 +1,10 @@
 export {};
-import { Division } from "../models/division.model";
+import { DivisionInList } from "../models/division.model";
 //Метод получения данных подразделения
 //Реализация на стороне браузера
 
 //Структура получаемых данных
-type ResponseData = ErrorData | Division;
+type ResponseData = ErrorData | DivisionInList[];
 
 interface ErrorData {
 	error?: string; //возвращается в случае ошибки
@@ -16,11 +16,8 @@ let percoServerHost = 'localhost';
 //авторизационный токен
 const token = 'master';
 
-//id подразделения
-const divisionId = 10;
-
 //запрос к серверу
-fetch(`http://${percoServerHost}/api/divisions/${divisionId}?token=${token}`, {
+fetch(`http://${percoServerHost}/api/divisions/list?token=${token}`, {
 	method: 'get',
 })
 	.then(async (response) => {
@@ -38,7 +35,7 @@ fetch(`http://${percoServerHost}/api/divisions/${divisionId}?token=${token}`, {
 	})
 	//обрабатываем полученные данные в случае успешного ответа сервера
 	.then((data) => {
-		console.log(`Данные подразделения с id=${divisionId}: `, data);
+		console.log(`Список подразделений: `, data);
 	})
 	//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 	.catch((error) => {

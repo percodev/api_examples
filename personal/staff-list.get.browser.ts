@@ -9,7 +9,7 @@ interface ErrorData {
 }
 
 
-type ResponseData = ErrorData & Staff[];
+type ResponseData = ErrorData | Staff[];
 
 //Здесь следует использовать адрес хоста percoweb
 let percoServerHost = "localhost";
@@ -40,7 +40,7 @@ fetch(`http://${percoServerHost}/api/users/staff/list?${queryString}`,{
     }
     //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
     else {
-        throw new Error(data.error)
+        throw new Error((<ErrorData>data).error)
     }
 })
 //обрабатываем полученные данные в случае успешного ответа сервера

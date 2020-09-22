@@ -1,11 +1,11 @@
 export {};
-import { Division } from "../models/division.model";
+import { DivisionInList } from "../models/division.model";
 //Метод получения данных подразделения
 //Реализация на стороне сервера nodejs
 import http from 'http'; //в случае https запроса следует импортировать https модуль
 
 //Структура получаемых данных
-type ResponseData = ErrorData | Division;
+type ResponseData = ErrorData | DivisionInList[];
 
 interface ErrorData {
 	error?: string; //возвращается в случае ошибки
@@ -15,14 +15,11 @@ interface ErrorData {
 //авторизационный токен
 let token = 'master'; 
 
-//id подразделения
-const divisionId = 10;
-
 //параметры http(s) запроса
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/divisions/${divisionId}?token=${token}`,
+    path: `/api/divisions/list?token=${token}`,
     method: 'GET'
 };
 
@@ -39,7 +36,7 @@ const req = http.request(options, (response) => {
 		let responseData = JSON.parse(data) as ResponseData;
 		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
 		if (response.statusCode === 200) {
-			console.log(`Данные подразделения с id=${divisionId}: `, data);
+			console.log(`Список подразделений: `, data);
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {

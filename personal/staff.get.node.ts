@@ -7,7 +7,7 @@ import { Staff } from "../models/staff.model";
 interface ErrorData {
 	error?: string; //возвращается в случае ошибки
 }
-type ResponseData = ErrorData & Staff;
+type ResponseData = ErrorData | Staff;
 
 //авторизационный токен
 const token = 'master'; 
@@ -40,7 +40,7 @@ const req = http.request(options, (response) => {
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {
-			throw new Error(`При выполнении запроса возникла ошибка: ${responseData.error}`);
+			throw new Error(`При выполнении запроса возникла ошибка: ${(<ErrorData>responseData).error}`);
 		}
 	});
 });
