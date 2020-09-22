@@ -1,12 +1,10 @@
 export {};
-import { DivisionInList } from "../models/division.model";
-//Метод получения списка подразделений
+//Метод удаления существующего подразделения
 //Реализация на стороне браузера
 
 //Структура получаемых данных
-type ResponseData = ErrorData | DivisionInList[];
-
-interface ErrorData {
+interface ResponseData {
+	result?: string; //id подразделения (возвращается в случае успеха)
 	error?: string; //возвращается в случае ошибки
 }
 
@@ -16,9 +14,13 @@ let percoServerHost = 'localhost';
 //авторизационный токен
 const token = 'master';
 
+//id удаляемого подразделения
+const divisionId = 11;
+
+
 //запрос к серверу
-fetch(`http://${percoServerHost}/api/divisions/list?token=${token}`, {
-	method: 'get',
+fetch(`http://${percoServerHost}/api/divisions/${divisionId}?token=${token}`, {
+	method: 'delete'
 })
 	.then(async (response) => {
 		//декодируем ответ в формате json
@@ -26,16 +28,12 @@ fetch(`http://${percoServerHost}/api/divisions/list?token=${token}`, {
 		//если сервер вернул код ответа 200, то передаем декодированные данные
 		//в следующий обработчик then
 		if (response.ok) {
-			return data;
+			console.log('Подразделение удалено успешно');
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {
-			throw new Error((<ErrorData>data).error);
+			throw new Error(data.error);
 		}
-	})
-	//обрабатываем полученные данные в случае успешного ответа сервера
-	.then((data) => {
-		console.log(`Список подразделений: `, data);
 	})
 	//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 	.catch((error) => {

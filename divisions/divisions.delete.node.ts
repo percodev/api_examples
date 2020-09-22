@@ -1,26 +1,26 @@
 export {};
-import { DivisionInList } from "../models/division.model";
-//Метод получения списка подразделений
+//Метод удаления существующего подразделения
 //Реализация на стороне сервера nodejs
 import http from 'http'; //в случае https запроса следует импортировать https модуль
 
 //Структура получаемых данных
-type ResponseData = ErrorData | DivisionInList[];
-
-interface ErrorData {
+interface ResponseData {
+	result?: string; //id подразделения (возвращается в случае успеха)
 	error?: string; //возвращается в случае ошибки
 }
 
-
 //авторизационный токен
 let token = 'master'; 
+
+//id удаляемого подразделения
+const divisionId = 10;
 
 //параметры http(s) запроса
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/divisions/list?token=${token}`,
-    method: 'GET'
+    path: `/api/divisions/${divisionId}?token=${token}`,
+    method: 'DELETE',    
 };
 
 //запрос к серверу
@@ -36,11 +36,11 @@ const req = http.request(options, (response) => {
 		let responseData = JSON.parse(data) as ResponseData;
 		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
 		if (response.statusCode === 200) {
-			console.log(`Список подразделений: `, data);
+			console.log('Подразделение удалено успешно');
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {
-			throw new Error(`При выполнении запроса возникла ошибка: ${(<ErrorData>responseData).error}`);
+			throw new Error(`При выполнении запроса возникла ошибка: ${responseData.error}`);
 		}
 	});
 });
