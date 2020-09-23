@@ -1,26 +1,26 @@
 export {};
-//Метод удаления существующего подразделения
+import { DivisionTree } from "../models/division.model";
+//Метод получения дерева подразделений
 //Реализация на стороне сервера nodejs
 import http from 'http'; //в случае https запроса следует импортировать https модуль
 
 //Структура получаемых данных
-interface ResponseData {
-	result?: string; //возвращается в случае успеха
+type ResponseData = ErrorData | DivisionTree[];
+
+interface ErrorData {
 	error?: string; //возвращается в случае ошибки
 }
 
+
 //авторизационный токен
 let token = 'master'; 
-
-//id удаляемого подразделения
-const divisionId = 10;
 
 //параметры http(s) запроса
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/divisions/${divisionId}?token=${token}`,
-    method: 'DELETE',    
+    path: `/api/divisions/tree?token=${token}`,
+    method: 'GET'
 };
 
 //запрос к серверу
@@ -36,11 +36,11 @@ const req = http.request(options, (response) => {
 		let responseData = JSON.parse(data) as ResponseData;
 		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
 		if (response.statusCode === 200) {
-			console.log('Подразделение удалено успешно');
+			console.log(`Дерево подразделений: `, <DivisionTree[]>responseData);
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {
-			throw new Error(`При выполнении запроса возникла ошибка: ${responseData.error}`);
+			throw new Error(`При выполнении запроса возникла ошибка: ${(<ErrorData>responseData).error}`);
 		}
 	});
 });

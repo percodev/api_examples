@@ -1,10 +1,12 @@
 export {};
-//Метод удаления существующего подразделения
+import { DivisionTree } from "../models/division.model";
+//Метод получения дерева подразделений
 //Реализация на стороне браузера
 
 //Структура получаемых данных
-interface ResponseData {
-	result?: string; //возвращается в случае успеха
+type ResponseData = ErrorData | DivisionTree[];
+
+interface ErrorData {
 	error?: string; //возвращается в случае ошибки
 }
 
@@ -14,13 +16,9 @@ let percoServerHost = 'localhost';
 //авторизационный токен
 const token = 'master';
 
-//id удаляемого подразделения
-const divisionId = 11;
-
-
 //запрос к серверу
-fetch(`http://${percoServerHost}/api/divisions/${divisionId}?token=${token}`, {
-	method: 'delete'
+fetch(`http://${percoServerHost}/api/divisions/tree?token=${token}`, {
+	method: 'get',
 })
 	.then(async (response) => {
 		//декодируем ответ в формате json
@@ -28,12 +26,16 @@ fetch(`http://${percoServerHost}/api/divisions/${divisionId}?token=${token}`, {
 		//если сервер вернул код ответа 200, то передаем декодированные данные
 		//в следующий обработчик then
 		if (response.ok) {
-			console.log('Подразделение удалено успешно');
+			return data;
 		}
 		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
 		else {
-			throw new Error(data.error);
+			throw new Error((<ErrorData>data).error);
 		}
+	})
+	//обрабатываем полученные данные в случае успешного ответа сервера
+	.then((data) => {
+		console.log(`Дерево подразделений: `, <DivisionTree[]>data);
 	})
 	//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 	.catch((error) => {
