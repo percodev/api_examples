@@ -1,5 +1,5 @@
 export {};
-import { Division } from "../models/division.model";
+import { Division } from "../types/division.model";
 //Метод получения данных подразделения
 //Реализация на стороне браузера
 

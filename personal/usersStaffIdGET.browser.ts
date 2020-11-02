@@ -1,4 +1,4 @@
-import { Staff } from "../models/staff.model";
+import { Staff } from "../types/staff.model";
 //Метод получения информации о сотруднике
 //Реализация на стороне браузера
 

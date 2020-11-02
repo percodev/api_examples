@@ -1,5 +1,5 @@
 export {};
-import { DivisionInList } from "../models/division.model";
+import { DivisionInList } from "../types/division.model";
 //Метод получения списка подразделений
 //Реализация на стороне браузера
 

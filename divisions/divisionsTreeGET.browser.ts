@@ -1,5 +1,5 @@
 export {};
-import { DivisionTree } from "../models/division.model";
+import { DivisionTree } from "../types/division.model";
 //Метод получения дерева подразделений
 //Реализация на стороне браузера
 

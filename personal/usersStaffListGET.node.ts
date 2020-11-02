@@ -1,7 +1,7 @@
 //Метод добавления нового сотрудника
 //Реализация на стороне сервера nodejs
 import http from 'http'; //в случае https запроса следует импортировать https модуль
-import { Staff } from "../models/staff.model";
+import { Staff } from "../types/staff.model";
 import querystring from "querystring";
 
 //Структура получаемых данных

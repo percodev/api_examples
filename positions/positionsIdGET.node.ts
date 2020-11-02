@@ -1,5 +1,5 @@
 export {};
-import { Position } from "../models/position.model";
+import { Position } from "../types/position.model";
 //Метод получения данных о должности
 //Реализация на стороне сервера nodejs
 import http from 'http'; //в случае https запроса следует импортировать https модуль

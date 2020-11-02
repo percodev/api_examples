@@ -11,24 +11,26 @@ interface ResponseData {
 //Здесь следует использовать адрес хоста percoweb
 let percoServerHost = "localhost";
 
-//Данные для отправки запроса
-let bodyParams = {
-    is_active: false,
-    dismissed_date: "2020-09-21" //дата увольнения
-};
-
 //авторизационный токен
 const token = 'master';
 
-//id сотрудника(ов), которого(ых) редактируем
-const ids = '140,139';
+/******Пример увольнения сотрудников *********/
+
+//Данные для отправки запроса
+let bodyParamsForDismiss = {
+    is_active: false,
+    dismissed_date: "2020-11-21" //дата увольнения
+};
+
+//id сотрудника(ов), которого(ых) увольняем
+const idsForDismiss = '140,139';
 //запрос к серверу
-fetch(`http://${percoServerHost}/api/users/staff?ids=${ids}&token=${token}`,{
+fetch(`http://${percoServerHost}/api/users/staff?ids=${idsForDismiss}&token=${token}`,{
     method: 'post',
     headers: {
         'Content-Type': 'application/json'
       },
-    body: JSON.stringify(bodyParams)
+    body: JSON.stringify(bodyParamsForDismiss)
 })
 .then(async response=>{
     //декодируем ответ в формате json
@@ -45,7 +47,47 @@ fetch(`http://${percoServerHost}/api/users/staff?ids=${ids}&token=${token}`,{
 })
 //обрабатываем полученные данные в случае успешного ответа сервера
 .then(()=>{
-    console.log(`Сотрудник(и) с id=${ids} успешно уволен(ы):`)
+    console.log(`Сотрудник(и) с id=${idsForDismiss} успешно уволен(ы):`)
+})
+//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
+.catch(error=>{
+    console.log(error.message)
+})
+
+
+/******Пример блокировки сотрудника *********/
+
+//Данные для отправки запроса
+let bodyParamsForBlock = {
+    is_block: true,
+};
+
+//id сотрудника(ов), которого(ых) блокируем
+const idsForBlock = '140,139';
+//запрос к серверу
+fetch(`http://${percoServerHost}/api/users/staff?ids=${idsForBlock}&token=${token}`,{
+    method: 'post',
+    headers: {
+        'Content-Type': 'application/json'
+      },
+    body: JSON.stringify(bodyParamsForBlock)
+})
+.then(async response=>{
+    //декодируем ответ в формате json
+    let data = await response.json() as ResponseData ;
+    //если сервер вернул код ответа 200, то передаем декодированные данные
+    //в следующий обработчик then
+    if(response.ok) {
+        return data;
+    }
+    //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+    else {
+        throw new Error(data.error)
+    }
+})
+//обрабатываем полученные данные в случае успешного ответа сервера
+.then(()=>{
+    console.log(`Сотрудник(и) с id=${idsForBlock} успешно заблокированы(ы):`)
 })
 //обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
 .catch(error=>{
