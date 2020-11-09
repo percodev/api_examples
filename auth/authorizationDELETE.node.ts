@@ -1,49 +1,49 @@
 export {};
-//Метод авторизации по логину и паролю
-//Реализация на стороне сервера nodejs
-import http from 'http'; //в случае https запроса следует импортировать https модуль
+//Operator session deletion method
+//Nodejs server side implementation
+import http from 'http'; //In case of https request, you need to import the https module
 
-//Структура получаемых данных
+//Response data structure
 interface ResponseData {
-    error?: string; //возвращается в случае ошибки
+    error?: string; //Returned in case of error
 }
 
-//Данные с авторизационным токеном
-let token = 'master'; //Необходимо подставить действующий токен
-//параметры http(s) запроса
+//Authorization token
+let token = 'master'; //Must substitute a valid token
+//http(s) request parameters
 const options = {
-	hostname: 'localhost', //здесь неоходимо подставить адрес хоста percoweb
-	port: 80, //в случае https запроса следует указывать 443
+	hostname: 'localhost', //Must use your percoweb host address here
+	port: 80, //In case of an https request, you must specify port 443
 	path: `/api/system/auth?token=${token}`,
 	method: 'DELETE',
 };
 
-//запрос к серверу
+//Server request
 const req = http.request(options, (response) => {
     let data = ''
-    //получаем данные от сервера
+    //Get data from the server
 	response.on('data', (chunk) => {
 		data += chunk;
     });
-    //обработка полученных данных
+    //Handling of received data
     response.on('end', () => {
-        //декодируем данные в json
+        //Decode the response in json format
         let responseData = JSON.parse(data) as ResponseData;
-        //если сервер вернул код ответа 200, то обрабатываем успешный ответ
+        //If the server returns a code of 200, then we process the data
         if(response.statusCode === 200) {
             console.log("Сессия оператора успешно сброшена")
         }
-        //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+        //If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
         else {
-            throw new Error(`При выполнении запроса возникла ошибка: ${responseData.error}`)
+            throw new Error(`An error occurred while executing the request ${responseData.error}`)
         }
     })
 });
 
-//обработка ошибок, возникших при выполнении запроса
+//Handling errors occurred during request execution
 req.on('error', (error) => {
 	console.error(error.message);
 });
 
-//завершаем запрос
+//completing the request
 req.end();

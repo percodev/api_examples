@@ -1,8 +1,11 @@
-Для компиляции примеров для браузера необходимо использовать команду:
+This repository contains examples of commonly used PERCo WEB API methods.
+At this moment, all examples implemented in two options: browser vanilla javascript and server nodejs javascript.
+
+To compile browser examples, use the command:
 npm run compile-browser
 
-Для компиляции примеров для nodejs необходимо использовать команду:
+To compile nodejs server examples, use the command:
 npm run compile-node
 
-Для компиляции всех примеров необходимо использовать команду:
+To compile all examples, use the command:
 npm run compile

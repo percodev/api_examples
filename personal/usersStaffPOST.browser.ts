@@ -1,30 +1,30 @@
 export {};
-//Метод для множественного редактирования сотрудников
-//Реализация на стороне браузера
+//Multiple staff editing method
+//Browser side implementation
 
-//Структура получаемых данных
+//Response data structure
 interface ResponseData {
-    result?: string; //возвращается в случае успеха
-    error?: string; //возвращается в случае ошибки
+    result?: string; //Returned in case of success
+    error?: string; //Returned in case of error
 }
 
-//Здесь следует использовать адрес хоста percoweb
+//Must use your percoweb host address here
 let percoServerHost = "localhost";
 
-//авторизационный токен
+//Authorization token
 const token = 'master';
 
-/******Пример увольнения сотрудников *********/
+/******Dismissal staff example *********/
 
-//Данные для отправки запроса
+//Request data
 let bodyParamsForDismiss = {
     is_active: false,
-    dismissed_date: "2020-11-21" //дата увольнения
+    dismissed_date: "2020-11-21" //date of dismissal
 };
 
-//id сотрудника(ов), которого(ых) увольняем
+//id(s) of the staff to be dismissed
 const idsForDismiss = '140,139';
-//запрос к серверу
+//Server request
 fetch(`http://${percoServerHost}/api/users/staff?ids=${idsForDismiss}&token=${token}`,{
     method: 'post',
     headers: {
@@ -33,38 +33,38 @@ fetch(`http://${percoServerHost}/api/users/staff?ids=${idsForDismiss}&token=${to
     body: JSON.stringify(bodyParamsForDismiss)
 })
 .then(async response=>{
-    //декодируем ответ в формате json
+    //Decode the response in json format
     let data = await response.json() as ResponseData ;
-    //если сервер вернул код ответа 200, то передаем декодированные данные
-    //в следующий обработчик then
+    //If the server returns a code of 200, then we process the data
+    //in next "then" handler
     if(response.ok) {
         return data;
     }
-    //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+    //If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
     else {
         throw new Error(data.error)
     }
 })
-//обрабатываем полученные данные в случае успешного ответа сервера
+//handle the received data in case of a successful server response
 .then(()=>{
-    console.log(`Сотрудник(и) с id=${idsForDismiss} успешно уволен(ы):`)
+    console.log(`Staff(s) with id=${idsForDismiss} succesfully dismissed:`)
 })
-//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
+//handle all possible errors that may occur during the execution of the "fetch" (e.g. server unavailability)
 .catch(error=>{
     console.log(error.message)
 })
 
 
-/******Пример блокировки сотрудника *********/
+/******Staff blocking example *********/
 
-//Данные для отправки запроса
+//Request data
 let bodyParamsForBlock = {
     is_block: true,
 };
 
-//id сотрудника(ов), которого(ых) блокируем
+//id(s) of the staff to be blocked
 const idsForBlock = '140,139';
-//запрос к серверу
+//Server request
 fetch(`http://${percoServerHost}/api/users/staff?ids=${idsForBlock}&token=${token}`,{
     method: 'post',
     headers: {
@@ -73,23 +73,23 @@ fetch(`http://${percoServerHost}/api/users/staff?ids=${idsForBlock}&token=${toke
     body: JSON.stringify(bodyParamsForBlock)
 })
 .then(async response=>{
-    //декодируем ответ в формате json
+    //Decode the response in json format
     let data = await response.json() as ResponseData ;
-    //если сервер вернул код ответа 200, то передаем декодированные данные
-    //в следующий обработчик then
+    //If the server returns a code of 200, then we process the data
+    //in next "then" handler
     if(response.ok) {
         return data;
     }
-    //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+    //If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
     else {
         throw new Error(data.error)
     }
 })
-//обрабатываем полученные данные в случае успешного ответа сервера
+//handle the received data in case of a successful server response
 .then(()=>{
-    console.log(`Сотрудник(и) с id=${idsForBlock} успешно заблокированы(ы):`)
+    console.log(`Staff(s) with id=${idsForBlock} succesfully blocked`)
 })
-//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
+//handle all possible errors that may occur during the execution of the "fetch" (e.g. server unavailability)
 .catch(error=>{
     console.log(error.message)
 })

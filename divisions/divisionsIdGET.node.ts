@@ -1,24 +1,24 @@
 export {};
 import { Division } from "../types/division.model";
-//Метод получения данных подразделения
-//Реализация на стороне сервера nodejs
-import http from 'http'; //в случае https запроса следует импортировать https модуль
+//Method of receiving division data
+//Nodejs server side implementation
+import http from 'http'; //in case of https request, you need to import the https module
 
-//Структура получаемых данных
+//Response data structure
 type ResponseData = ErrorData | Division;
 
 interface ErrorData {
-	error?: string; //возвращается в случае ошибки
+	error?: string; //Returned in case of error
 }
 
 
-//авторизационный токен
+//Authorization token
 let token = 'master'; 
 
-//id подразделения
+//Division id
 const divisionId = 10;
 
-//параметры http(s) запроса
+//http(s) request parameters
 const options = {
     hostname: 'localhost',
     port: 80,
@@ -26,32 +26,32 @@ const options = {
     method: 'GET'
 };
 
-//запрос к серверу
+//Server request
 const req = http.request(options, (response) => {
 	let data = '';
-	//получаем данные от сервера
+	//Get data from the server
 	response.on('data', (chunk) => {
 		data += chunk;
 	});
-	//обработка полученных данных
+	//Handling of received data
 	response.on('end', () => {
-        //декодируем данные в json
+        //Decode the response in json format
 		let responseData = JSON.parse(data) as ResponseData;
-		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
+		//If the server returns a code of 200, then we process the data
 		if (response.statusCode === 200) {
-			console.log(`Данные подразделения с id=${divisionId}: `, data);
+			console.log(`Division data with id=${divisionId}: `, data);
 		}
-		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+		//If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
 		else {
-			throw new Error(`При выполнении запроса возникла ошибка: ${(<ErrorData>responseData).error}`);
+			throw new Error(`An error occurred while executing the request ${(<ErrorData>responseData).error}`);
 		}
 	});
 });
 
-//обработка ошибок, возникших при выполнении запроса
+//Handling errors occurred during request execution
 req.on('error', (error) => {
 	console.error(error.message);
 });
 
-//завершаем запрос
+//Completing the request
 req.end();

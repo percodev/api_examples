@@ -1,30 +1,30 @@
 export {};
-//Метод редактирования существующей должности
-//Реализация на стороне браузера
+//Editing position method
+//Browser side implementation
 
-//Структура получаемых данных
+//Response data structure
 interface ResponseData {
-	result?: string; //id подразделения (возвращается в случае успеха)
-	error?: string; //возвращается в случае ошибки
+	result?: string; //division id (Returned in case of success)
+	error?: string; //Returned in case of error
 }
 
-//Здесь следует использовать адрес хоста percoweb
+//Must use your percoweb host address here
 let percoServerHost = 'localhost';
 
-//Данные для отправки запроса
+//Request data
 let bodyParams = {
-	comment: 'Отредактированная должность',
-	name: 'Новое название должности'
+	comment: 'Edited position',
+	name: 'New name of position'
 };
 
-//авторизационный токен
+//Authorization token
 const token = 'master';
 
-//id редактируемой должности
+//Position id
 const positionId = 7;
 
 
-//запрос к серверу
+//Server request
 fetch(`http://${percoServerHost}/api/divisions/${positionId}?token=${token}`, {
 	method: 'post',
 	headers: {
@@ -33,19 +33,19 @@ fetch(`http://${percoServerHost}/api/divisions/${positionId}?token=${token}`, {
 	body: JSON.stringify(bodyParams),
 })
 	.then(async (response) => {
-		//декодируем ответ в формате json
+		//Decode the response in json format
 		let data = (await response.json()) as ResponseData;
-		//если сервер вернул код ответа 200, то передаем декодированные данные
-		//в следующий обработчик then
+		//If the server returns a code of 200, then we process the data
+		//in next "then" handler
 		if (response.ok) {
-			console.log('Должность отредактирована успешно');
+			console.log('Position successfully edited');
 		}
-		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+		//If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
 		else {
 			throw new Error(data.error);
 		}
 	})
-	//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
+	//handle all possible errors that may occur during the execution of the "fetch" (e.g. server unavailability)
 	.catch((error) => {
 		console.log(error.message);
 	});

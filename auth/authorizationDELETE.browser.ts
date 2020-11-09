@@ -1,19 +1,19 @@
 export {};
-//Метод удаления сессии оператора
-//Реализация на стороне браузера
+//Operator session deletion method
+//Browser side implementation
 
-//Структура получаемых данных
+//Response data structure
 interface ResponseData {
-	error?: string; //возвращается в случае ошибки
+	error?: string; //Returned in case of error
 }
 
-//Здесь следует использовать адрес хоста percoweb
+//Must use your percoweb host address here
 let percoServerHost = 'localhost';
 
-//Данные с авторизационным токеном
-let token = 'master'; //Необходимо подставить действующий токен
+//Authorization token
+let token = 'master'; //Must substitute a valid token
 
-//запрос к серверу
+//Server request
 fetch(`http://${percoServerHost}/api/system/auth?token=${token}`, {
 	method: 'delete',
 	headers: {
@@ -21,18 +21,18 @@ fetch(`http://${percoServerHost}/api/system/auth?token=${token}`, {
 	}
 })
 	.then(async (response) => {
-		//декодируем ответ в формате json
+		//Decode the response in json format
 		let data = (await response.json()) as ResponseData;
-		//если сервер вернул код ответа 200, то обрабатываем данные
+		//If the server returns a code of 200, then we process the data
 		if (response.ok) {
-			console.log('Сессия оператора успешно сброшена');
+			console.log('Operator session successfully reset');
 		}
-		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+		//If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
 		else {
 			throw new Error(data.error);
 		}
 	})
-	//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
+	//handle all possible errors that may occur during the execution of the "fetch" (e.g. server unavailability)
 	.catch((error) => {
 		console.log(error.message);
 	});

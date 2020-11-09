@@ -1,21 +1,21 @@
 export {};
-//Метод редактирования сотрудника
-//Реализация на стороне браузера
+//Editing staff method
+//Browser side implementation
 
-//Структура получаемых данных
+//Response data structure
 interface ResponseData {
-    result?: string; //возвращается в случае успеха
-    error?: string; //возвращается в случае ошибки
+    result?: string; //Returned in case of success
+    error?: string; //Returned in case of error
 }
 
-//Здесь следует использовать адрес хоста percoweb
+//Must use your percoweb host address here
 let percoServerHost = "localhost";
 
-//Данные для отправки запроса
+//Request data
 let bodyParams = {
-	last_name: 'Семенов',
-	first_name: 'Семен',
-	middle_name: 'Олегович',
+	last_name: 'Feynman',
+	first_name: 'Richard',
+	middle_name: 'Phillips',
 	tabel_number: '12345678',
 	division: 4,
 	position: 4,
@@ -23,7 +23,7 @@ let bodyParams = {
 	access_template: 3,
 	additional_fields: {
 		text: [
-			{ id: -5, text: 'semenov@mail.com' },
+			{ id: -5, text: 'feynman@mail.com' },
 			{ id: -4, text: '+79654323455' },
 			{ id: -2, text: '1234' },
 		],
@@ -32,13 +32,13 @@ let bodyParams = {
 	hiring_date: '2020-09-17'
 };
 
-//авторизационный токен
+//Authorization token
 const token = 'master';
 
-//id сотрудника, данные которого редактируем
+//Staff id
 const userId = 140;
 
-//запрос к серверу
+//Server request
 fetch(`http://${percoServerHost}/api/users/staff/${userId}?token=${token}`,{
     method: 'post',
     headers: {
@@ -47,23 +47,23 @@ fetch(`http://${percoServerHost}/api/users/staff/${userId}?token=${token}`,{
     body: JSON.stringify(bodyParams)
 })
 .then(async response=>{
-    //декодируем ответ в формате json
+    //Decode the response in json format
     let data = await response.json() as ResponseData ;
-    //если сервер вернул код ответа 200, то передаем декодированные данные
-    //в следующий обработчик then
+    //If the server returns a code of 200, then we process the data
+    //in next "then" handler
     if(response.ok) {
         return data;
     }
-    //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+    //If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
     else {
         throw new Error(data.error)
     }
 })
-//обрабатываем полученные данные в случае успешного ответа сервера
+//handle the received data in case of a successful server response
 .then(data=>{
-    console.log("Результат операции: ",data.result)
+    console.log("Operation result: ",data.result)
 })
-//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
+//handle all possible errors that may occur during the execution of the "fetch" (e.g. server unavailability)
 .catch(error=>{
     console.log(error.message)
 })

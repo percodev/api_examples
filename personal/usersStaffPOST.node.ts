@@ -1,16 +1,16 @@
 export {};
-//Метод для множественного редактирования сотрудников
-//Реализация на стороне сервера nodejs
-import http from 'http'; //в случае https запроса следует импортировать https модуль
+//Multiple staff editing method
+//Nodejs server side implementation
+import http from 'http'; //in case of https request, you need to import the https module
 import querystring from "querystring";
 
-//Структура получаемых данных
+//Response data structure
 interface ResponseData {
-	result?: number; //id сотрудника (возвращается в случае успеха)
-	error?: string; //возвращается в случае ошибки
+	result?: number; //Staff id (Returned in case of success)
+	error?: string; //Returned in case of error
 }
 
-/******Пример увольнения сотрудников *********/
+/******Dismissal staff example *********/
 
 //Данные body для отправки запроса на увольнение
 let bodyParamsForDismiss = JSON.stringify({
@@ -18,16 +18,16 @@ let bodyParamsForDismiss = JSON.stringify({
     dismissed_date: "2020-11-21" //дата увольнения
 });
 
-//id сотрудника(ов), которого(ых) редактируем (увольняем)
+//id(s) of the staff to be dismissed
 let idsForDismiss = ['140','139'];
 
-// Формируем строку параметров
+// Form a string of parameters
 let queryStringForDismiss = querystring.stringify({
-	token: 'master', //авторизационный токен
+	token: 'master', //Authorization token
 	ids:idsForDismiss
 })
 
-//параметры http(s) запроса
+//http(s) request parameters
 const optionsForDismiss = {
     hostname: 'localhost',
     port: 80,
@@ -40,56 +40,56 @@ const optionsForDismiss = {
     
 };
 
-//запрос к серверу
+//Server request
 const reqForDismiss = http.request(optionsForDismiss, (response) => {
 	let data = '';
-	//получаем данные от сервера
+	//Get data from the server
 	response.on('data', (chunk) => {
 		data += chunk;
 	});
-	//обработка полученных данных
+	//Handling of received data
 	response.on('end', () => {
-        //декодируем данные в json
+        //Decode the response in json format
 		let responseData = JSON.parse(data) as ResponseData;
-		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
+		//If the server returns a code of 200, then we process the data
 		if (response.statusCode === 200) {
-			console.log(`Сотрудник(и) с id=${idsForDismiss} успешно уволен(ы):`)
+			console.log(`Staff(s) with id=${idsForDismiss} succesfully dismissed:`)
 		}
-		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+		//If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
 		else {
-			throw new Error(`При выполнении запроса возникла ошибка: ${responseData.error}`);
+			throw new Error(`An error occurred while executing the request ${responseData.error}`);
 		}
 	});
 });
 
-//отправляем тело запроса
+//Sending request body
 reqForDismiss.write(bodyParamsForDismiss);
 
-//обработка ошибок, возникших при выполнении запроса
+//Handling errors occurred during request execution
 reqForDismiss.on('error', (error) => {
 	console.error(error.message);
 });
 
-//завершаем запрос
+//Completing the request
 reqForDismiss.end();
 
-/******Пример блокировки сотрудника *********/
+/******Staff blocking example *********/
 
 //Данные body для отправки запроса на блокировку
 let bodyParamsForBlock = JSON.stringify({
 	is_block: true,
 });
 
-//id сотрудника(ов), которого(ых) блокируем
+//id(s) of the staff to be blocked
 let idsForBlock = ['140','139'];
 
-// Формируем строку параметров
+// Form a string of parameters
 let queryStringForBlock = querystring.stringify({
-	token: 'master', //авторизационный токен
+	token: 'master', //Authorization token
 	ids:idsForBlock
 })
 
-//параметры http(s) запроса
+//http(s) request parameters
 const options = {
     hostname: 'localhost',
     port: 80,
@@ -102,35 +102,35 @@ const options = {
     
 };
 
-//запрос к серверу
+//Server request
 const reqForBlock = http.request(options, (response) => {
 	let data = '';
-	//получаем данные от сервера
+	//Get data from the server
 	response.on('data', (chunk) => {
 		data += chunk;
 	});
-	//обработка полученных данных
+	//Handling of received data
 	response.on('end', () => {
-        //декодируем данные в json
+        //Decode the response in json format
 		let responseData = JSON.parse(data) as ResponseData;
-		//если сервер вернул код ответа 200, то обрабатываем успешный ответ
+		//If the server returns a code of 200, then we process the data
 		if (response.statusCode === 200) {
-			console.log(`Сотрудник(и) с id=${idsForBlock} успешно заблокирован(ы):`)
+			console.log(`Staff(s) with id=${idsForBlock} succesfully blocked`)
 		}
-		//если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+		//If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
 		else {
-			throw new Error(`При выполнении запроса возникла ошибка: ${responseData.error}`);
+			throw new Error(`An error occurred while executing the request ${responseData.error}`);
 		}
 	});
 });
 
-//отправляем тело запроса
+//Sending request body
 reqForBlock.write(bodyParamsForBlock);
 
-//обработка ошибок, возникших при выполнении запроса
+//Handling errors occurred during request execution
 reqForBlock.on('error', (error) => {
 	console.error(error.message);
 });
 
-//завершаем запрос
+//Completing the request
 reqForBlock.end();

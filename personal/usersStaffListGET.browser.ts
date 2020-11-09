@@ -1,53 +1,53 @@
 import { Staff } from "../types/staff.model";
-//Метод получения списка сотрудников
-//Реализация на стороне браузера
+//Method of receiving staff list
+//Browser side implementation
 
-//Структура получаемых данных
+//Response data structure
 
 interface ErrorData {
-    error?: string; //возвращается в случае ошибки
+    error?: string; //Returned in case of error
 }
 
 
 type ResponseData = ErrorData | Staff[];
 
-//Здесь следует использовать адрес хоста percoweb
+//Must use your percoweb host address here
 let percoServerHost = "localhost";
 
-//авторизационный токен
+//Authorization token
 const token = 'master';
 
-//Подразделение(я)
+//Division(s)
 let division = '3,4,5'
 
-//Строка поиска
-let searchString = 'Семен'
+//Search string
+let searchString = 'Richard'
 
-// Формируем строку параметров
+// Form a string of parameters
 let queryString = `token=${token}&searchString=${searchString}&division=${division}`;
 
-//запрос к серверу
+//Server request
 fetch(`http://${percoServerHost}/api/users/staff/list?${queryString}`,{
     method: 'get'
 })
 .then(async response=>{
-    //декодируем ответ в формате json
+    //Decode the response in json format
     let data = await response.json() as ResponseData ;
-    //если сервер вернул код ответа 200, то передаем декодированные данные
-    //в следующий обработчик then
+    //If the server returns a code of 200, then we process the data
+    //in next "then" handler
     if(response.ok) {
         return data;
     }
-    //если возникла ошибка на стороне сервера, то выбрасываем ошибку с ее описанием (описание ошибки возвращается серером)
+    //If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
     else {
         throw new Error((<ErrorData>data).error)
     }
 })
-//обрабатываем полученные данные в случае успешного ответа сервера
+//handle the received data in case of a successful server response
 .then(data=>{
-    console.log(`Список сортудников: `,data)
+    console.log(`Staff list: `,data)
 })
-//обрабатываем все возможные ошибки, которые могут возникнуть во время выполнения fetch (например недоступность сервера)
+//handle all possible errors that may occur during the execution of the "fetch" (e.g. server unavailability)
 .catch(error=>{
     console.log(error.message)
 })
