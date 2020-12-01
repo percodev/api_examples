@@ -7,5 +7,5 @@ npm run compile-browser
 To compile nodejs server examples, use the command:
 npm run compile-node
 
-To compile all examples, use the command:
+To compile browser and nodejs examples, use the command:
 npm run compile
