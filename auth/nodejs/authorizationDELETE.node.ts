@@ -31,7 +31,7 @@ const req = http.request(options, (response) => {
         let responseData = JSON.parse(data) as ResponseData;
         //If the server returns a code of 200, then we process the data
         if(response.statusCode === 200) {
-            console.log("Сессия оператора успешно сброшена")
+            console.log("Session deleted")
         }
         //If an error occurs on the server side, then we throw an error with its description (the error description is returned by the server)
         else {

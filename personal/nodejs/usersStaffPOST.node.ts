@@ -12,10 +12,9 @@ interface ResponseData {
 
 /******Dismissal staff example *********/
 
-//Данные body для отправки запроса на увольнение
 let bodyParamsForDismiss = JSON.stringify({
 	is_active: false,
-    dismissed_date: "2020-11-21" //дата увольнения
+    dismissed_date: "2020-11-21"
 });
 
 //id(s) of the staff to be dismissed
@@ -75,7 +74,6 @@ reqForDismiss.end();
 
 /******Staff blocking example *********/
 
-//Данные body для отправки запроса на блокировку
 let bodyParamsForBlock = JSON.stringify({
 	is_block: true,
 });
