@@ -14,7 +14,7 @@ let percoServerHost = "localhost";
 //Login and password data
 let bodyParams = {
     login: "admin",
-    password: "admin1",
+    password: "password",
 };
 
 //Server request

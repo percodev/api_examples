@@ -11,7 +11,7 @@ interface ResponseData {
 //Login and password data
 let bodyParams = JSON.stringify({
 	login: 'admin',
-    password: 'admin1',
+    password: 'password',
     region_id: 0
 });
 

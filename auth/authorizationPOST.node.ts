@@ -12,7 +12,7 @@ interface ResponseData {
 //Login and password data
 let bodyParams = JSON.stringify({
 	login: 'admin',
-	password: 'admin1',
+	password: 'password',
 });
 
 //http(s) request parameters
