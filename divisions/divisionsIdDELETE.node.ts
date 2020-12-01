@@ -10,7 +10,7 @@ interface ResponseData {
 }
 
 //Authorization token
-let token = 'master'; 
+let token = 'user_token';
 
 //Id of the deleted division
 const divisionId = 10;

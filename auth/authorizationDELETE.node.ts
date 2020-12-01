@@ -9,7 +9,7 @@ interface ResponseData {
 }
 
 //Authorization token
-let token = 'master'; //Must substitute a valid token
+let token = 'user_token'; //Must substitute a valid token
 //http(s) request parameters
 const options = {
 	hostname: 'localhost', //Must use your percoweb host address here

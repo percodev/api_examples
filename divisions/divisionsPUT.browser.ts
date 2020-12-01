@@ -23,7 +23,7 @@ let bodyParams = {
 };
 
 //Authorization token
-let token = 'master';
+let token = 'user_token';
 
 //Server request
 fetch(`http://${percoServerHost}/api/divisions?token=${token}`, {

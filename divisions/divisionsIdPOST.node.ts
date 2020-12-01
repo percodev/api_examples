@@ -17,7 +17,7 @@ let bodyParams = JSON.stringify({
 });
 
 //Authorization token
-let token = 'master'; 
+let token = 'user_token';
 
 //id of the edited division
 const divisionId = 10;

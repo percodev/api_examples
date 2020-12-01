@@ -23,7 +23,7 @@ let idsForDismiss = ['140','139'];
 
 // Form a string of parameters
 let queryStringForDismiss = querystring.stringify({
-	token: 'master', //Authorization token
+	token: 'user_token', //Authorization token
 	ids:idsForDismiss
 })
 
@@ -85,7 +85,7 @@ let idsForBlock = ['140','139'];
 
 // Form a string of parameters
 let queryStringForBlock = querystring.stringify({
-	token: 'master', //Authorization token
+	token: 'user_token', //Authorization token
 	ids:idsForBlock
 })
 

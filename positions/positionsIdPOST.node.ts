@@ -16,7 +16,7 @@ let bodyParams = JSON.stringify({
 });
 
 //Authorization token
-let token = 'master'; 
+let token = 'user_token';
 
 //Position id
 const positionId = 7;

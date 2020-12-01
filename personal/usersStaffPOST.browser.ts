@@ -12,7 +12,7 @@ interface ResponseData {
 let percoServerHost = "localhost";
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 /******Dismissal staff example *********/
 

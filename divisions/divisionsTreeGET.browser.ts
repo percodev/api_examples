@@ -14,7 +14,7 @@ interface ErrorData {
 let percoServerHost = 'localhost';
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 //Server request
 fetch(`http://${percoServerHost}/api/divisions/tree?token=${token}`, {

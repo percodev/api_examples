@@ -13,7 +13,7 @@ type ResponseData = ErrorData | Staff;
 
 // Form a string of parameters
 let queryString = querystring.stringify({
-	token: 'master', //Authorization token
+	token: 'user_token', //Authorization token
 	division: ['3','4','5'], //Division(s)
 	searchString: 'Richard' //Search string
 })

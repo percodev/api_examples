@@ -11,7 +11,7 @@ interface ResponseData {
 let percoServerHost = 'localhost';
 
 //Authorization token
-let token = 'master'; //Must substitute a valid token
+let token = 'user_token'; //Must substitute a valid token
 
 //Server request
 fetch(`http://${percoServerHost}/api/system/auth?token=${token}`, {

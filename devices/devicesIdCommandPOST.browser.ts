@@ -21,7 +21,7 @@ let bodyParams = <DeviceCommand>{
 };
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 //device id
 const deviceId = 696590;

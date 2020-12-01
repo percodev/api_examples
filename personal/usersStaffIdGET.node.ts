@@ -10,7 +10,7 @@ interface ErrorData {
 type ResponseData = ErrorData | Staff;
 
 //Authorization token
-const token = 'master'; 
+const token = 'user_token';
 
 //Staff id
 const userId = 140;

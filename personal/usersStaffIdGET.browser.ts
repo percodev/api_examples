@@ -15,7 +15,7 @@ type ResponseData = ErrorData | Staff;
 let percoServerHost = "localhost";
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 //Staff id
 const userId = 140;

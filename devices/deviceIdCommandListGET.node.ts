@@ -12,7 +12,7 @@ interface ErrorData {
 
 
 //Authorization token
-let token = 'master'; 
+let token = 'user_token';
 
 //device id
 const deviceId = 696590;

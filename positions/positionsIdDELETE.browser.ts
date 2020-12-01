@@ -12,7 +12,7 @@ interface ResponseData {
 let percoServerHost = 'localhost';
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 //Position id
 const positionId = 6;

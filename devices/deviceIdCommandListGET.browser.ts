@@ -18,7 +18,7 @@ let percoServerHost = 'localhost';
 const deviceId = 696590;
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 //Server request
 fetch(`http://${percoServerHost}/api/devices/${deviceId}/commandList?token=${token}`, {

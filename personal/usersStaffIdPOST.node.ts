@@ -31,7 +31,7 @@ let bodyParams = JSON.stringify({
 });
 
 //Authorization token
-const token = 'master'; 
+const token = 'user_token';
 
 //Staff id
 const userId = 140;

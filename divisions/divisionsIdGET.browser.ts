@@ -14,7 +14,7 @@ interface ErrorData {
 let percoServerHost = 'localhost';
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 //division id
 const divisionId = 10;

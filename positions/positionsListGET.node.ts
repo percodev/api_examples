@@ -13,7 +13,7 @@ interface ErrorData {
 
 
 //Authorization token
-let token = 'master'; 
+let token = 'user_token';
 
 //http(s) request parameters
 const options = {

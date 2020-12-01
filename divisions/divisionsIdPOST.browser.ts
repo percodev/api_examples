@@ -19,7 +19,7 @@ let bodyParams = {
 };
 
 //Authorization token
-const token = 'master';
+const token = 'user_token';
 
 //id of the edited division
 const divisionId = 10;
