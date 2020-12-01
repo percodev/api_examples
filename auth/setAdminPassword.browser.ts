@@ -1,5 +1,5 @@
 export {};
-//Метод установки логина, пароля администратора и региона при первом входе в систему
+//Admin password setting method
 //Browser side implementation
 
 //Response data structure
