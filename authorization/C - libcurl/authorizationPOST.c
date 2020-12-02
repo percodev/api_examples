@@ -16,7 +16,7 @@ int main() {
         curl_easy_setopt(curl, CURLOPT_URL, "http://localhost/api/system/auth");
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, response_handler);
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-        curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+        curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "http");
         struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, "Content-Type: application/json");
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
