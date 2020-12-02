@@ -1,12 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <curl/curl.h>
 
 char *token;
 
 void response_handler(void *ptr, size_t size, size_t nmemb, void *stream) {
-    token = malloc(sizeof(char) * size * nmemb);
-    sprintf(token, "%s", (char *) ptr);
+    token = (char *) ptr;
 }
 
 int main() {
@@ -22,7 +20,7 @@ int main() {
         struct curl_slist *headers = NULL;
         headers = curl_slist_append(headers, "Content-Type: application/json");
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        const char *data = "{\n\"login\": \"admin\",\n\"password\": \"admin1\"\n}";
+        const char *data = "{\"login\": \"admin\",\"password\": \"admin_password\"}";
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
         res = curl_easy_perform(curl);
     }
