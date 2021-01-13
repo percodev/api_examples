@@ -1,0 +1,8 @@
+{
+  "host": "localhost",
+  "post": 80,
+  "auth": {
+    "login": "admin",
+    "password": "password"
+  }
+}
