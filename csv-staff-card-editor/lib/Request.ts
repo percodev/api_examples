@@ -4,7 +4,7 @@
 import * as http from "http";
 
 export class Request {
-    public static send(options, data?): Promise<any | Error> {
+    public static send(options, body?): Promise<any | Error> {
         return new Promise((resolve, reject) => {
             // Запрос
             const req = http.request(options, (response) => {
@@ -27,7 +27,7 @@ export class Request {
                 })
             })
             // Отправляем запрос
-            data && req.write(data);
+            body && req.write(body);
             // Обработка ошибок выполнения запроса
             req.on('error', (error) => {
                 reject(error);
