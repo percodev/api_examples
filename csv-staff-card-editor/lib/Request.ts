@@ -21,7 +21,8 @@ export class Request {
                         return
                     } else {
                         // Код, отличный от 200 отклоняем как ошибку
-                        reject(JSON.parse(data));
+                        const res = JSON.parse(data);
+                        reject(Error(res.error || res));
                     }
                 })
             })

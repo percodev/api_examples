@@ -8,8 +8,8 @@ import {Card} from "./lib/Card";
     // Авторизация
     const authData = await Auth.get().then(t => t).catch(c => c);
     // Обработка ошибок
-    if (authData instanceof Error || authData.error) {
-        throw Error(authData.error || authData)
+    if (authData instanceof Error) {
+        throw authData
     }
     // Кешируем данные из файла для отслеживания изменений
     const cache = new FileCache("./staff.csv");
@@ -33,7 +33,7 @@ import {Card} from "./lib/Card";
                     // Если есть карты, удаляем основную карту
                     const removeCard = await Card.removeMainCard(authData.token, staff.id).catch(c => c);
                     // Обрабатываем ошибки
-                    if (removeCard instanceof Error || removeCard.error) {
+                    if (removeCard instanceof Error) {
                         console.error(staff);
                     }
                 }
@@ -42,7 +42,7 @@ import {Card} from "./lib/Card";
                     // Если назначили, записываем новую основную карту
                     const postCard = await Card.postMainCard(authData.token, staff.id, row.card).catch(c => c);
                     // Обрабатываем ошибки
-                    if (postCard instanceof Error || postCard.error) {
+                    if (postCard instanceof Error) {
                         console.error(postCard);
                     }
                 }

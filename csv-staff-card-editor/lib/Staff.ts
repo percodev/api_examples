@@ -26,8 +26,8 @@ export class Staff {
         // Выполнение запроса
         const staff = await Request.send(options).then(t => t.rows[0] || null).catch(c => c);
         // Обработка ошибок
-        if (staff instanceof Error || staff?.error) {
-            return staff.error ? new Error(staff.error) : staff
+        if (staff instanceof Error) {
+            return staff
         }
         return staff as StaffRow;
     }
