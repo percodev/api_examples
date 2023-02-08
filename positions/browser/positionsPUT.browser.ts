@@ -21,10 +21,11 @@ let bodyParams = {
 let token = 'user_token';
 
 //Server request
-fetch(`http://${percoServerHost}/api/positions?token=${token}`, {
+fetch(`http://${percoServerHost}/api/positions`, {
 	method: 'put',
 	headers: {
 		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${token}`,
 	},
 	body: JSON.stringify(bodyParams),
 })

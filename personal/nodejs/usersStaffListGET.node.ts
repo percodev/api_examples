@@ -10,10 +10,11 @@ interface ErrorData {
 }
 type ResponseData = ErrorData | Staff;
 
+//Authorization token
+const token = 'user_token';
 
 // Form a string of parameters
 let queryString = querystring.stringify({
-	token: 'user_token', //Authorization token
 	division: ['3','4','5'], //Division(s)
 	searchString: 'Richard' //Search string
 })
@@ -23,7 +24,8 @@ const options = {
     hostname: 'localhost',
     port: 80,
     path: `/api/users/staff/list?${queryString}`,
-    method: 'GET'
+    method: 'GET',
+	headers: { 'Authorization': `Bearer ${token}` }
 };
 console.log(options)
 //Server request

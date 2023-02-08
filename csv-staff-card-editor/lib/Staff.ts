@@ -6,7 +6,6 @@ export class Staff {
     public static async getStaffByPersonnelNumber(token, personnelNumber): Promise<StaffRow | Error> {
         // Параметры запроса
         const qs = querystring.encode({
-            token,
             status: "active",
             filters: JSON.stringify(
                 {
@@ -20,7 +19,8 @@ export class Staff {
             path: `/api/users/staff/table?` + qs, // Path API метода
             method: 'GET', // Метод запроса
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             }
         };
         // Выполнение запроса

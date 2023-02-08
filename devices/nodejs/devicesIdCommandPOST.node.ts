@@ -27,11 +27,12 @@ const deviceId = 696590;
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/devices/${deviceId}/command?token=${token}`,
+    path: `/api/devices/${deviceId}/command`,
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(bodyParams),
+		'Authorization': `Bearer ${token}`,
     },
     
 };

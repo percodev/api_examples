@@ -20,8 +20,9 @@ const token = 'user_token';
 const positionId = 7;
 
 //Server request
-fetch(`http://${percoServerHost}/api/positions/${positionId}?token=${token}`, {
+fetch(`http://${percoServerHost}/api/positions/${positionId}`, {
 	method: 'get',
+	headers: { 'Authorization': `Bearer ${token}` }
 })
 	.then(async (response) => {
 		//Decode the response in json format

@@ -14,8 +14,9 @@ let token = 'user_token'; //Must substitute a valid token
 const options = {
 	hostname: 'localhost', //Must use your percoweb host address here
 	port: 80, //In case of an https request, you must specify port 443
-	path: `/api/system/auth?token=${token}`,
+	path: `/api/system/auth`,
 	method: 'DELETE',
+    headers: { 'Authorization': `Bearer ${token}` },
 };
 
 //Server request

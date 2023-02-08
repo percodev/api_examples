@@ -22,11 +22,12 @@ let token = 'user_token';
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/positions?token=${token}`,
+    path: `/api/positions`,
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(bodyParams),
+		'Authorization': `Bearer ${token}`,
     },
     
 };

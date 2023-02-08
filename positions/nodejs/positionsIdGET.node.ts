@@ -22,8 +22,9 @@ const positionId = 7;
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/positions/${positionId}?token=${token}`,
-    method: 'GET'
+    path: `/api/positions/${positionId}`,
+    method: 'GET',
+	headers: { 'Authorization': `Bearer ${token}` }
 };
 
 //Server request

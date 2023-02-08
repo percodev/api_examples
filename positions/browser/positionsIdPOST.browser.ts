@@ -25,10 +25,11 @@ const positionId = 7;
 
 
 //Server request
-fetch(`http://${percoServerHost}/api/divisions/${positionId}?token=${token}`, {
+fetch(`http://${percoServerHost}/api/divisions/${positionId}`, {
 	method: 'post',
 	headers: {
 		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${token}`,
 	},
 	body: JSON.stringify(bodyParams),
 })

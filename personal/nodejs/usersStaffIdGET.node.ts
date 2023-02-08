@@ -19,8 +19,9 @@ const userId = 140;
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/users/staff/${userId}?token=${token}`,
-    method: 'GET'
+    path: `/api/users/staff/${userId}`,
+    method: 'GET',
+	headers: { 'Authorization': `Bearer ${token}` }
 };
 
 //Server request

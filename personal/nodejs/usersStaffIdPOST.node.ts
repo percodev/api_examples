@@ -39,11 +39,12 @@ const userId = 140;
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/users/staff/${userId}?token=${token}`,
+    path: `/api/users/staff/${userId}`,
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(bodyParams),
+		'Authorization': `Bearer ${token}`
     },
     
 };

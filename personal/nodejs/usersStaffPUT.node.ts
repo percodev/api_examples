@@ -3,6 +3,9 @@ export {};
 //Nodejs server side implementation
 import http from 'http'; //in case of https request, you need to import the https module
 
+//Authorization token
+const token = 'user_token';
+
 //Response data structure
 interface ResponseData {
 	id?: number; //Staff id (Returned in case of success)
@@ -30,17 +33,16 @@ let bodyParams = JSON.stringify({
 	hiring_date: '2020-09-17'
 });
 
-//Authorization token
-let token = 'user_token';
 //http(s) request parameters
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/users/staff?token=${token}`,
+    path: `/api/users/staff`,
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(bodyParams),
+		'Authorization': `Bearer ${token}`
     },
     
 };

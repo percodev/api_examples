@@ -24,11 +24,12 @@ let division = '3,4,5'
 let searchString = 'Richard'
 
 // Form a string of parameters
-let queryString = `token=${token}&searchString=${searchString}&division=${division}`;
+let queryString = `searchString=${searchString}&division=${division}`;
 
 //Server request
 fetch(`http://${percoServerHost}/api/users/staff/list?${queryString}`,{
-    method: 'get'
+    method: 'get',
+    headers: { 'Authorization': `Bearer ${token}` }
 })
 .then(async response=>{
     //Decode the response in json format

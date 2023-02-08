@@ -14,10 +14,11 @@ let percoServerHost = 'localhost';
 let token = 'user_token'; //Must substitute a valid token
 
 //Server request
-fetch(`http://${percoServerHost}/api/system/auth?token=${token}`, {
+fetch(`http://${percoServerHost}/api/system/auth`, {
 	method: 'delete',
 	headers: {
 		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${token}`
 	}
 })
 	.then(async (response) => {

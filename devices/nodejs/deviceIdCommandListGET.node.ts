@@ -21,8 +21,9 @@ const deviceId = 696590;
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/devices/${deviceId}/commandList?token=${token}`,
-    method: 'GET'
+    path: `/api/devices/${deviceId}/commandList`,
+    method: 'GET',
+	headers: { 'Authorization': `Bearer ${token}` }
 };
 
 //Server request

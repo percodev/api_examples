@@ -19,8 +19,9 @@ const positionId = 7;
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/positions/${positionId}?token=${token}`,
-    method: 'DELETE',    
+    path: `/api/positions/${positionId}`,
+    method: 'DELETE',
+	headers: { 'Authorization': `Bearer ${token}` }
 };
 
 //Server request

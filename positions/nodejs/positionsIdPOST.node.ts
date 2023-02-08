@@ -25,11 +25,12 @@ const positionId = 7;
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/divisions/${positionId}?token=${token}`,
+    path: `/api/divisions/${positionId}`,
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(bodyParams),
+		'Authorization': `Bearer ${token}`,
     },
     
 };

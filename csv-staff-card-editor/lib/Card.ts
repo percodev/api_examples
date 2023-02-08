@@ -15,11 +15,12 @@ export class Card {
         const options = {
             hostname: config.host, // URL сервера PW
             port: config.post, // Порт
-            path: `/api/users/${userId}/mainCard?token=${token}`, // Path API метода
+            path: `/api/users/${userId}/mainCard`, // Path API метода
             method: 'POST', // Метод запроса
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Length': Buffer.byteLength(bodyParams),
+                'Authorization': `Bearer ${token}`,
             },
         };
         // Выполнение запроса
@@ -32,8 +33,9 @@ export class Card {
         const options = {
             hostname: config.host, // URL сервера PW
             port: config.post, // Порт
-            path: `/api/users/${userId}/mainCard?token=${token}`, // Path API метода
-            method: 'DELETE' // Метод запроса
+            path: `/api/users/${userId}/mainCard`, // Path API метода
+            method: 'DELETE', // Метод запроса
+            headers: { 'Authorization': `Bearer ${token}` }
         };
         // Выполнение запроса
         return Request.send(options)

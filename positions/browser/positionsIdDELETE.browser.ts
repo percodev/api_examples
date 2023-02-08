@@ -19,8 +19,9 @@ const positionId = 6;
 
 
 //Server request
-fetch(`http://${percoServerHost}/api/positions/${positionId}?token=${token}`, {
-	method: 'delete'
+fetch(`http://${percoServerHost}/api/positions/${positionId}`, {
+	method: 'delete',
+	headers: { 'Authorization': `Bearer ${token}` }
 })
 	.then(async (response) => {
 		//Decode the response in json format

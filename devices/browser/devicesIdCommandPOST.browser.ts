@@ -28,10 +28,11 @@ const deviceId = 696590;
 
 
 //Server request
-fetch(`http://${percoServerHost}/api/devices/${deviceId}/command?token=${token}`, {
+fetch(`http://${percoServerHost}/api/devices/${deviceId}/command`, {
 	method: 'post',
 	headers: {
 		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${token}`,
 	},
 	body: JSON.stringify(bodyParams),
 })

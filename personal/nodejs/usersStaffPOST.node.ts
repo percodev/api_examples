@@ -10,6 +10,9 @@ interface ResponseData {
 	error?: string; //Returned in case of error
 }
 
+//Authorization token
+const token = 'user_token';
+
 /******Dismissal staff example *********/
 
 let bodyParamsForDismiss = JSON.stringify({
@@ -22,7 +25,6 @@ let idsForDismiss = ['140','139'];
 
 // Form a string of parameters
 let queryStringForDismiss = querystring.stringify({
-	token: 'user_token', //Authorization token
 	ids:idsForDismiss
 })
 
@@ -35,6 +37,7 @@ const optionsForDismiss = {
     headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(bodyParamsForDismiss),
+		'Authorization': `Bearer ${token}`
     },
     
 };

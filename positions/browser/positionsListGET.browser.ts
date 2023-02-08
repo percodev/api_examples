@@ -17,8 +17,9 @@ let percoServerHost = 'localhost';
 const token = 'user_token';
 
 //Server request
-fetch(`http://${percoServerHost}/api/positions/list?token=${token}`, {
+fetch(`http://${percoServerHost}/api/positions/list`, {
 	method: 'get',
+	headers: { 'Authorization': `Bearer ${token}` }
 })
 	.then(async (response) => {
 		//Decode the response in json format

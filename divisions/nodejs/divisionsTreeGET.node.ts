@@ -19,8 +19,9 @@ let token = 'user_token';
 const options = {
     hostname: 'localhost',
     port: 80,
-    path: `/api/divisions/tree?token=${token}`,
-    method: 'GET'
+    path: `/api/divisions/tree`,
+    method: 'GET',
+	headers: { 'Authorization': `Bearer ${token}` }
 };
 
 //Server request
