@@ -20,7 +20,7 @@ let bodyParams = {
     division: 5,
     position: 5,
     work_schedule: 5,
-    access_template: 3,
+    access_template: [3],
     additional_fields: {
         text: [
             {id: -5, text: 'feynman@mail.com'},

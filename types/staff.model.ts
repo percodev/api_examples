@@ -11,7 +11,7 @@ export interface Staff {
 	end_datetime: string;
 	division: NamedId;
 	position: NamedId;
-	access_template: NamedId;
+	access_template: NamedId[];
 	work_schedule: NamedId;
 	identifier: string;
 	barcode: string;
